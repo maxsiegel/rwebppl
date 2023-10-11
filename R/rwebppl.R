@@ -40,36 +40,36 @@ clean_webppl <- function() {
 #' @examples
 #' \dontrun{install_webppl('0.9.6')}
 #' \dontrun{install_webppl('4bd2452333d24c122aee98c3206584bc39c6096a')}
-install_webppl <- function(webppl_version) {
-  # first, clean up any webppl version that might already exist
-  if(file_exists(webppl_executable())) {
-    clean_webppl()
-  }
-  message("installing webppl ...", appendLF = FALSE)
-  npm_info <- system2("npm", args = c("info", "webppl", "versions", "--json"),
-                      stdout = TRUE)
-  npm_versions <- jsonlite::fromJSON(paste(npm_info, collapse = ""))
-  if (webppl_version %in% npm_versions) {
-    rwebppl_json <- file.path(rwebppl_path(), "json", "rwebppl.json")
-    rwebppl_meta <- jsonlite::fromJSON(readLines(rwebppl_json))
-    rwebppl_meta$dependencies$webppl <- webppl_version
-    webppl_json <- file.path(rwebppl_path(), "js", "package.json")
+# install_webppl <- function(webppl_version) {
+#   # first, clean up any webppl version that might already exist
+#   if(file_exists(webppl_executable())) {
+#     clean_webppl()
+#   }
+#   message("installing webppl ...", appendLF = FALSE)
+#   npm_info <- system2("npm", args = c("info", "webppl", "versions", "--json"),
+#                       stdout = TRUE)
+#   npm_versions <- jsonlite::fromJSON(paste(npm_info, collapse = ""))
+#   if (webppl_version %in% npm_versions) {
+#     rwebppl_json <- file.path(rwebppl_path(), "json", "rwebppl.json")
+#     rwebppl_meta <- jsonlite::fromJSON(readLines(rwebppl_json))
+#     rwebppl_meta$dependencies$webppl <- webppl_version
+#     webppl_json <- file.path(rwebppl_path(), "js", "package.json")
 
-    # Executable bit should be tracked by git but chmod just in case
-    system2('chmod', args = c('+x', file.path(rwebppl_path(), "bash", "*")))
+#     # Executable bit should be tracked by git but chmod just in case
+#     system2('chmod', args = c('+x', file.path(rwebppl_path(), "bash", "*")))
 
-    writeLines(jsonlite::toJSON(rwebppl_meta, auto_unbox = TRUE, pretty = TRUE),
-               webppl_json)
-    system2(file.path(rwebppl_path(), "bash", "install-webppl.sh"),
-            args = rwebppl_path())
-    system2(file.path(rwebppl_path(), "bash", "rearrange-webppl.sh"),
-            args = rwebppl_path())
-  } else {
-    system2(file.path(rwebppl_path(), "bash", "install-dev-webppl.sh"),
-            args = c(rwebppl_path(), webppl_version))
-  }
-  message(" done")
-}
+#     writeLines(jsonlite::toJSON(rwebppl_meta, auto_unbox = TRUE, pretty = TRUE),
+#                webppl_json)
+#     system2(file.path(rwebppl_path(), "bash", "install-webppl.sh"),
+#             args = rwebppl_path())
+#     system2(file.path(rwebppl_path(), "bash", "rearrange-webppl.sh"),
+#             args = rwebppl_path())
+#   } else {
+#     system2(file.path(rwebppl_path(), "bash", "install-dev-webppl.sh"),
+#             args = c(rwebppl_path(), webppl_version))
+#   }
+#   message(" done")
+# }
 
 # Internal function to ensure the user already has webppl installed on load
 # Installs default version in DESCRIPTION if it doesn't already exist
@@ -97,8 +97,8 @@ get_webppl_version <- function() {
 }
 
 .onLoad <- function(libname, pkgname) {
-  check_webppl()
-  get_webppl_version()
+  # check_webppl()
+  # get_webppl_version()
 }
 
 #' Install webppl package
