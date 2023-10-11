@@ -16,10 +16,11 @@ file_exists <- function(path) {
 }
 file_exists <- function(x) {
   if (Sys.which(x)!="") {
-    return TRUE
+    return(TRUE)
   }
   else {
-    return FALSE}
+    return(FALSE)
+  }
   }
 
 # Internal function that cleans the local webppl install
