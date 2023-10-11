@@ -14,7 +14,13 @@ file_exists <- function(path) {
   existsFlag <- suppressWarnings(system2("exist", args = args, stdout = T))
   return(existsFlag == 1)
 }
-file_exists <- function(x) TRUE
+file_exists <- function(x) {
+  if (Sys.which(x)!="") {
+    return TRUE
+  }
+  else {
+    return FALSE}
+  }
 
 # Internal function that cleans the local webppl install
 clean_webppl <- function() {
