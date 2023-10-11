@@ -11,7 +11,7 @@ global_pkg_path <- function() path.expand("~/.webppl")
 # Internal function that checks whether a file exists
 file_exists <- function(path) {
   args <- c("!", "-e", path, ";", "echo", "$?")
-  existsFlag <- suppressWarnings(system2("test", args = args, stdout = T))
+  existsFlag <- suppressWarnings(system2("IF EXIST", args = args, stdout = T))
   return(existsFlag == 1)
 }
 
