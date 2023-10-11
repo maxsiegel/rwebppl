@@ -54,7 +54,7 @@ clean_webppl <- function() {
 #     rwebppl_meta <- jsonlite::fromJSON(readLines(rwebppl_json))
 #     rwebppl_meta$dependencies$webppl <- webppl_version
 #     webppl_json <- file.path(rwebppl_path(), "js", "package.json")
-install_webppl <- function {} TRUE
+install_webppl <- function() TRUE
 
 #     # Executable bit should be tracked by git but chmod just in case
 #     system2('chmod', args = c('+x', file.path(rwebppl_path(), "bash", "*")))
